@@ -1,11 +1,16 @@
 /*
- * $Id: ldscript-xbe.ld,v 1.1 2003/03/18 18:08:48 huceke Exp $
+ * $Id: ldscript-xbe.ld,v 1.2 2003/04/17 09:04:45 mist Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript-xbe.ld,v $
+ * Revision 1.2  2003/04/17 09:04:45  mist
+ * Cramwell :-) The ROM version now copies all code into RAM.
+ * Unfortunately booting Linux does not work any more at the moment (memory
+ * allocation issue?)
+ *
  * Revision 1.1  2003/03/18 18:08:48  huceke
  * *** empty log message ***
  *
@@ -81,6 +86,7 @@ SECTIONS {
 
 	.text ( 0x02fc0c80 ) : AT ( 0xc80 )  { /* was 0xfffc0c80  0xc80 */
 		_start_text = . ;
+		*(rom);
 		*(.text);
 		_end_text = . ;
 	}
