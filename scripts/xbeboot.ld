@@ -1,13 +1,13 @@
 /*
- * $Id: xbeboot.ld,v 1.4 2003/05/12 20:59:19 hamtitampti Exp $
+ * $Id: xbeboot.ld,v 1.5 2003/05/16 18:27:52 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: xbeboot.ld,v $
- * Revision 1.4  2003/05/12 20:59:19  hamtitampti
- * New Memorymodell
+ * Revision 1.5  2003/05/16 18:27:52  hamtitampti
+ * Now better Inits of the CPU, more documenation and sync with my developer tree
  *
  * Revision 1.2  2003/05/07 07:47:34  franz
  * Syncing with my developer Tree now
