@@ -1,11 +1,11 @@
 #
-# $Id: Makefile,v 1.8 2002/12/25 15:30:34 huceke Exp $
+# $Id: Makefile.rom,v 1.1 2002/12/25 15:30:34 huceke Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
-# $Log: Makefile,v $
-# Revision 1.8  2002/12/25 15:30:34  huceke
+# $Log: Makefile.rom,v $
+# Revision 1.1  2002/12/25 15:30:34  huceke
 # Changed the build of the rom and xbe version.
 #
 # Copy the right Makefile for build ROM or XBE Version.
