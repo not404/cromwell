@@ -1,13 +1,14 @@
 /*
- * $Id: ldscript.ld,v 1.1 2002/09/14 12:11:58 warmcat Exp $
+ * $Id: ldscript.ld,v 1.2 2002/09/19 10:39:19 warmcat Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
- * Revision 1.1  2002/09/14 12:11:58  warmcat
- * Initial revision
+ * Revision 1.2  2002/09/19 10:39:19  warmcat
+ * Merged Michael's Bochs stuff with current cromwell
+ * note requires the cpp0-2.95 preprocessor
  *
  * Revision 1.5  2002/08/19 13:48:55  meriac
  * need of nasm during linkage removed
