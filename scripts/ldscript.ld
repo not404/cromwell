@@ -1,11 +1,15 @@
 /*
- * $Id: ldscript.ld,v 1.4 2003/04/25 11:32:09 hamtitampti Exp $
+ * $Id: ldscript.ld,v 1.5 2003/04/25 19:33:11 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
+ * Revision 1.5  2003/04/25 19:33:11  hamtitampti
+ * Fixed Compiler/Linker Problems with gcc 3.2x
+ * thx. Oliver
+ *
  * Revision 1.4  2003/04/25 11:32:09  hamtitampti
  * switched on the FPU on cromwell startup, compiler now to -mpentium
  *
@@ -112,6 +116,7 @@ SECTIONS {
 			*(.rodata.str1.1);
 			*(.rodata.str1.32);
 			*(.rodata.cst4);
+			*(.rodata.cst8);
 	_start_backdrop = .;
 			*(.backdrop);
 	_end_backdrop = .;

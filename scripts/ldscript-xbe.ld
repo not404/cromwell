@@ -1,11 +1,15 @@
 /*
- * $Id: ldscript-xbe.ld,v 1.5 2003/04/23 11:03:56 hamtitampti Exp $
+ * $Id: ldscript-xbe.ld,v 1.6 2003/04/25 19:33:11 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript-xbe.ld,v $
+ * Revision 1.6  2003/04/25 19:33:11  hamtitampti
+ * Fixed Compiler/Linker Problems with gcc 3.2x
+ * thx. Oliver
+ *
  * Revision 1.5  2003/04/23 11:03:56  hamtitampti
  * First Step of .xbe 4 times linker fixing
  *
@@ -109,6 +113,7 @@ SECTIONS {
 		*(.rodata.str1.1);
 		*(.rodata.str1.32);
 		*(.rodata.cst4);
+		*(.rodata.cst8);
 		_start_backdrop = .;
 		*(.backdrop);
 		_end_backdrop = .;
