@@ -1,10 +1,14 @@
 #
-# $Id: Makefile,v 1.12 2003/02/01 14:36:50 warmcat Exp $
+# $Id: Makefile,v 1.13 2003/02/09 18:41:08 warmcat Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
+# Revision 1.13  2003/02/09 18:41:08  warmcat
+# Merged Ed's WD drive fixes
+# Made a start on USB init
+#
 # Revision 1.12  2003/02/01 14:36:50  warmcat
 # 800x600 video mode now default for PAL, thanks to Petteri Kangaslampi's work on nvtv.
 # Set encoder bit for Luma LPF for 800x600, which voids Chroma artifacts on composite when the Luma if too HF.
@@ -93,10 +97,11 @@ jpeg-6b/jdpostct.o jpeg-6b/jddctmgr.o jpeg-6b/jidctfst.o jpeg-6b/jidctflt.o jpeg
 jpeg-6b/jdsample.o jpeg-6b/jdcolor.o jpeg-6b/jquant1.o jpeg-6b/jquant2.o jpeg-6b/jdmerge.o jpeg-6b/jmemnobs.o \
 jpeg-6b/jmemmgr.o jpeg-6b/jcomapi.o jpeg-6b/jutils.o jpeg-6b/jerror.o \
 BootFlash.o BootEEPROM.o\
+BootUsbOhci.o
 # !!! killed temporarily to allow clean CVS checkin
 #BootEthernet.o \
 #nvn/nvnetlib.o
-#BootUsbOhci.o
+
 
 
 #RESOURCES = rombios.elf amended2bl.elf xcodes11.elf
@@ -158,6 +163,8 @@ install:
 	lmilk -f -p image.bin
 	lmilk -f -a c0000 -p image.bin -q
 
+1m:
+	cat image.bin image.bin image.bin image.bin > image1m.bin
 
 bios: rombios.bin
 
