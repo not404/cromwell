@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript.ld,v 1.4 2002/12/18 10:38:25 warmcat Exp $
+ * $Id: ldscript.ld,v 1.5 2003/01/13 12:29:07 warmcat Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
+ * Revision 1.5  2003/01/13 12:29:07  warmcat
+ * Left off BootInterrupts.c from last commit :-)
+ *
  * Revision 1.4  2002/12/18 10:38:25  warmcat
  * ISO9660 support added allowing CD boot; linuxboot.cfg support; some extra compiletime options and CD tray management stuff
  *
@@ -52,30 +55,7 @@ TOP_ROM_LOAD = ( LOW_ROM_LOAD + ROM_SIZE - 512 );
 
 SECTIONS {
 
-		/* ram allocations */
 
-	.data RAM_BASE : {
-			_start_data = .;
-				*(.data);
-		*(.sdata);
-		*(.sdata2);
-		*(.got);
-		_end_data = .;
-		}
-
-	/* the data (initialized globals) is moved to ram by the startup code */
-
-	_start_load_data = LOADADDR(.data);
-	_end_load_data = LOADADDR(.data) + SIZEOF(.data);
-
-	.bss ( ADDR(.data) + SIZEOF(.data) ) : {
-		_bss = .;
-		*(.bss)
-		*(.sbss)
-		*(COMMON)
-		_ebss = . ;
-		_heap = . ;
-	}
 
 		/* ROM allocations */
 
@@ -115,7 +95,42 @@ SECTIONS {
 			*(.backdrop);
 	_end_backdrop = .;
 		_end_rodata = . ;
+ }
+
+
+		/* ram allocations */
+
+	.data (RAM_BASE) : AT( 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) ) {
+			_start_data = .;
+				*(.data);
+		*(.sdata);
+		*(.sdata2);
+		*(.got);
+		_end_data = .;
+		}
+
+	RamCopy (0x90000) : AT( 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data)) {
+			_start_ramcopy = .;
+				*(RamCopy);
+		_end_ramcopy = .;
+		}
+
+
+	/* the data (initialized globals) is moved to ram by the startup code */
+
+	_start_load_data = LOADADDR(.data);
+	_end_load_data = LOADADDR(.data) + SIZEOF(.data);
+
+	.bss ( ADDR(.data) + SIZEOF(.data) ) : {
+		_bss = .;
+		*(.bss)
+		*(.sbss)
+		*(COMMON)
+		_ebss = . ;
+		_heap = . ;
 	}
+
+
 
 	.rodata-rombios (0xffffe000 - 0x10004) : AT ((0x3e000) - 0x10004) {
 			*(.rodata-rombios);
