@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript-xbe.ld,v 1.2 2003/01/13 13:33:35 huceke Exp $
+ * $Id: ldscript-xbe.ld,v 1.3 2003/01/14 17:46:57 huceke Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript-xbe.ld,v $
+ * Revision 1.3  2003/01/14 17:46:57  huceke
+ * Xromwell should work again.
+ *
  * Revision 1.2  2003/01/13 13:33:35  huceke
  * Forgot it to commit
  *
@@ -108,7 +111,7 @@ SECTIONS {
 	}
 
         RamCopy (0x90000) : AT( 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data)) {
-		_start_ramcopy = .;
+		_start_ramcopy = . - 0x90000 + 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data);
 		*(RamCopy);
 		_end_ramcopy = .;
 	}
