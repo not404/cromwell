@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript.ld,v 1.5 2003/01/13 12:29:07 warmcat Exp $
+ * $Id: ldscript.ld,v 1.6 2003/01/14 15:24:33 warmcat Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
+ * Revision 1.6  2003/01/14 15:24:33  warmcat
+ * New menu UI.  VSYNC IRQ up.  Franz's I2C check added.  Flashtype and Ed's EEPROM report added.
+ *
  * Revision 1.5  2003/01/13 12:29:07  warmcat
  * Left off BootInterrupts.c from last commit :-)
  *
@@ -65,8 +68,6 @@ SECTIONS {
 		_end_low_rom = . ;
 	}
 
-
-
 	.xcodes11 (0xfffc0080) : AT (0x80) {
 		_start_xcodes11 = . ;
 		*(.xcodes11);
@@ -110,7 +111,7 @@ SECTIONS {
 		}
 
 	RamCopy (0x90000) : AT( 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data)) {
-			_start_ramcopy = .;
+			_start_ramcopy = . - 0x90000 + 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data);
 				*(RamCopy);
 		_end_ramcopy = .;
 		}

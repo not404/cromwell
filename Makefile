@@ -1,10 +1,21 @@
 #
-# $Id: Makefile,v 1.9 2003/01/13 12:29:07 warmcat Exp $
+# $Id: Makefile,v 1.10 2003/01/14 15:24:18 warmcat Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
+# Revision 1.10  2003/01/14 15:24:18  warmcat
+# New menu UI.  VSYNC IRQ up.  Franz's I2C check added.  Flashtype and Ed's EEPROM report added.
+#
+# Revision 1.3  2003/01/13 13:33:02  huceke
+# Added a little function for reading the EEPROM content.
+# Added support for setting the MAC Address at boottime.
+# Updatet the Makefile and linkagescript for the xbe part.
+#
+# Revision 1.2  2003/01/13 12:33:52  warmcat
+# Updated Makefile.rom
+#
 # Revision 1.9  2003/01/13 12:29:07  warmcat
 # Left off BootInterrupts.c from last commit :-)
 #
@@ -68,7 +79,7 @@ jpeg-6b/jdinput.o jpeg-6b/jdmarker.o jpeg-6b/jdhuff.o jpeg-6b/jdphuff.o jpeg-6b/
 jpeg-6b/jdpostct.o jpeg-6b/jddctmgr.o jpeg-6b/jidctfst.o jpeg-6b/jidctflt.o jpeg-6b/jidctint.o jpeg-6b/jidctred.o \
 jpeg-6b/jdsample.o jpeg-6b/jdcolor.o jpeg-6b/jquant1.o jpeg-6b/jquant2.o jpeg-6b/jdmerge.o jpeg-6b/jmemnobs.o \
 jpeg-6b/jmemmgr.o jpeg-6b/jcomapi.o jpeg-6b/jutils.o jpeg-6b/jerror.o \
-BootFlash.o \
+BootFlash.o BootEEPROM.o\
 # !!! killed temporarily to allow clean CVS checkin
 #BootEthernet.o \
 #nvn/nvnetlib.o
