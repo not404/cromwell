@@ -1,10 +1,15 @@
 #
-# $Id: Makefile,v 1.14 2003/02/17 08:31:00 huceke Exp $
+# $Id: Makefile,v 1.15 2003/02/26 11:43:23 huceke Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
+# Revision 1.15  2003/02/26 11:43:23  huceke
+# Reworked the bootmenu. The CVS is taged with CROMWELL_1_9_OLDMENU.
+# So we can switch back easily. Cromwell now can also boot from fatx
+# and Xromwell have the menu from cromwell working.
+#
 # Revision 1.14  2003/02/17 08:31:00  huceke
 # Initial checkin of FATX support. It is dissable by default.
 # Some logic for the handling of FATX must be done.
@@ -122,7 +127,7 @@ clean	:
 	rm -rf *.o *~ core *.core ${OBJECTS} ${RESOURCES} image.elf image.bin
 #	mv nvn/nvnetlib.o.tmp nvn/nvnetlib.o
 	rm -f  *.a _rombios_.c _rombios_.s rombios.s rombios.bin rombios.txt
-	rm -f  backdrop.elf image_1024.bin
+	rm -f  backdrop.elf image1m.bin
 
 image.elf : ${OBJECTS} ${RESOURCES}
 	${LD} -o $@ ${OBJECTS} ${RESOURCES} ${LDFLAGS}
