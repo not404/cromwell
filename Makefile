@@ -1,10 +1,22 @@
 #
-# $Id: Makefile,v 1.16 2003/03/04 11:01:39 warmcat Exp $
+# $Id: Makefile,v 1.17 2003/03/10 14:57:17 warmcat Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
+# Revision 1.17  2003/03/10 14:57:17  warmcat
+# Audio is up, tested in Cromwell and Xromwell
+#  Kind of stupid sounds only at the moment as there is no space in the ROM for big samples
+#  Polyphonic mixer
+#  Fourier-type sythesizer
+#  IRQ-handled Attack/Sustain/Decay type amplitude envelope
+#  See BootStartBios.c for a good example of how to use
+#  Audio IRQ is reentrant so latency for video interrupt is not compromised
+# Added #include <string.h> to BootFATX and BootParser stopping compile errors on gcc 3.2
+# More USB edits
+# Burnx halts on Makefile error as suggested by alias
+#
 # Revision 1.16  2003/03/04 11:01:39  warmcat
 # Fixed Xromwell CD Boot problem
 # Cromwell and Xromwell both tell Linux to use DMA on HDD and DVD now
@@ -114,6 +126,7 @@ jpeg-6b/jdpostct.o jpeg-6b/jddctmgr.o jpeg-6b/jidctfst.o jpeg-6b/jidctflt.o jpeg
 jpeg-6b/jdsample.o jpeg-6b/jdcolor.o jpeg-6b/jquant1.o jpeg-6b/jquant2.o jpeg-6b/jdmerge.o jpeg-6b/jmemnobs.o \
 jpeg-6b/jmemmgr.o jpeg-6b/jcomapi.o jpeg-6b/jutils.o jpeg-6b/jerror.o \
 BootFlash.o BootEEPROM.o\
+BootAudio.o\
 BootUsbOhci.o BootParser.o BootFATX.o
 # !!! killed temporarily to allow clean CVS checkin
 #BootEthernet.o \
