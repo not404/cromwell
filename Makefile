@@ -1,10 +1,13 @@
 #
-# $Id: Makefile,v 1.6 2002/12/24 03:53:33 huceke Exp $
+# $Id: Makefile,v 1.7 2002/12/25 11:04:20 huceke Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
+# Revision 1.7  2002/12/25 11:04:20  huceke
+# Cosmetic changes in the build procedure
+#
 # Revision 1.6  2002/12/24 03:53:33  huceke
 # Added loading the cromwell as an xbe
 #
@@ -39,6 +42,7 @@ CFLAGS	= -g -Wall -Werror -DFSYS_REISERFS -Igrub -DSTAGE1_5 -DNO_DECOMPRESSION -
 LD	= ld
 LDFLAGS	= -s -S -T ldscript.ld
 LDFLAGS-XBE	= -s -S -T ldscript-xbe.ld
+LDFLAGS-BOOT	= -s -S -T xbeboot.ld
 OBJCOPY	= objcopy
 # The BIOS make process requires the gcc 2.95 preprocessor, not 2.96 and ot 3.x
 # if you have gcc 2.95, you can use the following line:
@@ -51,6 +55,7 @@ GCC295 = cpp0-2.95
 BCC = /usr/lib/bcc/bcc-cc1
 
 ### objects
+OBJECTS-XBE = xbeboot.o
 OBJECTS	= BootStartup.o BootResetAction.o BootPerformPicChallengeResponseAction.o  \
 BootPciPeripheralInitialization.o BootVgaInitialization.o BootIde.o \
 BootHddKey.o rc4.o sha1.o BootVideoHelpers.o vsprintf.o filtror.o BootStartBios.o setup.o BootFilesystemIso9660.o \
@@ -69,19 +74,20 @@ RESOURCES = xcodes11.elf backdrop.elf
 # target:
 all	: image.bin image-xbe.bin default.xbe
 
-default.xbe :
-	cpp xbeboot.S -o xbeboot.s
-	as -o xbeboot.o xbeboot.s
-	ld -Ttext 0x10000 -Tdata 0x10000 -e _start -s --oformat binary -o default.xbe xbeboot.o
+default.elf : ${OBJECTS-XBE}
+	${LD} -o $@ ${OBJECTS-XBE} ${LDFLAGS-BOOT}
+
+default.xbe : default.elf
+	${OBJCOPY} --output-target=binary --strip-all $< $@
 	cat image-xbe.bin image-xbe.bin image-xbe.bin image-xbe.bin>> default.xbe
 	dd if=/dev/zero bs=1024 count=200 >> default.xbe
-	mkisofs -udf -o image-xbe.iso default.xbe
-	
+	@ls -l $@
+
 clean	:
 	rm -rf *.o *~ core *.core ${OBJECTS} ${RESOURCES} image.elf image.bin
 	rm -f  *.a _rombios_.c _rombios_.s rombios.s rombios.bin rombios.txt
 	rm -f  backdrop.elf default.xbe default.elf image-xbe.bin image-xbe.elf
-	rm -f default.xbe image-xbe.iso
+	rm -f default.xbe default.elf
 
 image.elf : ${OBJECTS} ${RESOURCES}
 	${LD} -o $@ ${OBJECTS} ${RESOURCES} ${LDFLAGS}
