@@ -16,7 +16,7 @@
  */
 
 /*
- *  $Id: xremote.c,v 1.2 2003/09/15 20:02:12 hamtitampti Exp $
+ *  $Id: xremote.c,v 1.3 2004/11/20 20:29:36 davidmpye Exp $
  *
  *  Copyright (c) 2002 Steven Toth <steve@toth.demon.co.uk>
  *
@@ -124,7 +124,8 @@ static void xremote_disconnect(struct usb_interface *intf)
 }
 
 static struct usb_device_id xremote_id_table [] = {
-	{ USB_DEVICE(0x045e, 0x0284) }, /* Microsoft, DVD dongle */
+	{ USB_DEVICE(0x040b, 0x6521) }, /* Gamester Xbox DVD Movie Playback Kit IR */
+	{ USB_DEVICE(0x045e, 0x0284) }, /* Microsoft Xbox DVD Movie Playback Kit IR */
 	{ } /* Terminating entry */
 };
 
