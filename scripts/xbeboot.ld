@@ -1,11 +1,21 @@
 /*
- * $Id: xbeboot.ld,v 1.5 2003/05/16 18:27:52 hamtitampti Exp $
+ * $Id: xbeboot.ld,v 1.6 2003/05/24 20:08:15 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: xbeboot.ld,v $
+ * Revision 1.6  2003/05/24 20:08:15  hamtitampti
+ * Sync with my tree, Fixed MTTR, Fixed video Kernel Paramers, improoved
+ * CPU inits, Better CPU Exit from xromwell, Isolated and found the System
+ * Inactivity timer and fixed the Watchdog register
+ * Note: Flashing in Cromwell (Flash system) not working since 4 weeks now,
+ * i am working on it
+ *
+ * Revision 1.3  2003/05/20 15:57:22  franz
+ * SYNC with SF 20052003-1800
+ *
  * Revision 1.5  2003/05/16 18:27:52  hamtitampti
  * Now better Inits of the CPU, more documenation and sync with my developer tree
  *

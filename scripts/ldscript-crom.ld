@@ -1,5 +1,5 @@
 /*
- * $Id: ldscript-crom.ld,v 1.4 2003/05/16 18:27:52 hamtitampti Exp $
+ * $Id: ldscript-crom.ld,v 1.5 2003/05/24 20:08:15 hamtitampti Exp $
  * loader script
 
  *
