@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript.ld,v 1.3 2003/04/19 17:49:28 huceke Exp $
+ * $Id: ldscript.ld,v 1.4 2003/04/25 11:32:09 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
+ * Revision 1.4  2003/04/25 11:32:09  hamtitampti
+ * switched on the FPU on cromwell startup, compiler now to -mpentium
+ *
  * Revision 1.3  2003/04/19 17:49:28  huceke
  * Cramwell now working on my v1.0 Xbox. ( Just a complete
  * of Micheals work ).
@@ -112,7 +115,7 @@ SECTIONS {
 	_start_backdrop = .;
 			*(.backdrop);
 	_end_backdrop = .;
-		_end_rodata = . ;
+	_end_rodata = . ;
  }
 
 
