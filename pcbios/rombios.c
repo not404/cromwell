@@ -190,6 +190,8 @@
 
 
 #asm
+
+.section .rombios_start, "ax"
 .rom
 
 .org 0x0000
@@ -1107,10 +1109,10 @@ Bit16u cdrom_boot();
 
 #endif // BX_ELTORITO_BOOT
 
-static char bios_cvs_version_string[] = "$Revision: 1.9 $";
-static char bios_date_string[] = "$Date: 2003/08/26 15:15:18 $";
+static char bios_cvs_version_string[] = "$Revision: 1.10 $";
+static char bios_date_string[] = "$Date: 2003/08/26 19:31:13 $";
 
-static char CVSID[] = "$Id: rombios.c,v 1.9 2003/08/26 15:15:18 hamtitampti Exp $";
+static char CVSID[] = "$Id: rombios.c,v 1.10 2003/08/26 19:31:13 hamtitampti Exp $";
 
 /* Offset to skip the CVS $Id: prefix */ 
 #define bios_version_string  (CVSID + 4)
