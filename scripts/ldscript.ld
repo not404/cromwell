@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript.ld,v 1.7 2003/04/27 06:41:06 huceke Exp $
+ * $Id: ldscript.ld,v 1.8 2003/04/27 08:48:54 oliverschwartz Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
+ * Revision 1.8  2003/04/27 08:48:54  oliverschwartz
+ * Enable linking with gcc 3.2 again
+ *
  * Revision 1.7  2003/04/27 06:41:06  huceke
  * Now the video code is based on the autocalculation of xbv.
  * So we call this version of cromwell :
@@ -122,7 +125,7 @@ SECTIONS {
 			*(.rodata.str1.1);
 			*(.rodata.str1.32);
 			*(.rodata.cst4);
-/*			*(.rodata.cst8); */
+			*(.rodata.cst8); 
 	_start_backdrop = .;
 			*(.backdrop);
 	_end_backdrop = .;
