@@ -1,11 +1,15 @@
 /*
- * $Id: ldscript.ld,v 1.2 2003/04/17 09:04:45 mist Exp $
+ * $Id: ldscript.ld,v 1.3 2003/04/19 17:49:28 huceke Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript.ld,v $
+ * Revision 1.3  2003/04/19 17:49:28  huceke
+ * Cramwell now working on my v1.0 Xbox. ( Just a complete
+ * of Micheals work ).
+ *
  * Revision 1.2  2003/04/17 09:04:45  mist
  * Cramwell :-) The ROM version now copies all code into RAM.
  * Unfortunately booting Linux does not work any more at the moment (memory
@@ -58,7 +62,7 @@ MEMORY
 }
 
 //RAM_CODE = 0x3F00000;
-RAM_CODE = 0x10000; /* 64 KB */
+RAM_CODE = 0x3B00000; /* 59 MB */
 RAM_BASE = 0x300000;  /* was 0x400000 */
 
 /* this should be changed depending the actual size of the rom */
@@ -112,7 +116,7 @@ SECTIONS {
  }
 
 
-		/* ram allocations */
+	/* ram allocations */
 
 	.data (RAM_BASE) : AT( 0xc80 + SIZEOF(.rom)+ SIZEOF(.rodata) ) {
 			_start_data = .;
@@ -121,7 +125,7 @@ SECTIONS {
 		*(.sdata2);
 		*(.got);
 		_end_data = .;
-		}
+	}
 
 	RamCopy (RAM_CODE) : AT( 0xc80 + SIZEOF(.rom)+ SIZEOF(.rodata) +SIZEOF(.data)) {
 		_ram_location = .;
