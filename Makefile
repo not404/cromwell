@@ -1,10 +1,17 @@
 #
-# $Id: Makefile,v 1.15 2003/02/26 11:43:23 huceke Exp $
+# $Id: Makefile,v 1.16 2003/03/04 11:01:39 warmcat Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
+# Revision 1.16  2003/03/04 11:01:39  warmcat
+# Fixed Xromwell CD Boot problem
+# Cromwell and Xromwell both tell Linux to use DMA on HDD and DVD now
+# Problem with MS BIOS wanting to reset time and date after Xromwell or Cromwell used solved
+# Bunch of interrupts up in Xromwell, smoother UI, extsmi up - added fade back in to Xromwell icons
+# Added a tiny script and changes to Makefiles to simplify CDRW dev (see README)
+#
 # Revision 1.15  2003/02/26 11:43:23  huceke
 # Reworked the bootmenu. The CVS is taged with CROMWELL_1_9_OLDMENU.
 # So we can switch back easily. Cromwell now can also boot from fatx
@@ -176,6 +183,14 @@ install:
 
 1m:
 	cat image.bin image.bin image.bin image.bin > image1m.bin
+
+burn:
+	cp default.xbe cdr --reply=y
+	mkisofs -R -J -udf -o boot.iso cdr
+	cdrecord -dao -dev=0,0,0 -driveropts=burnfree speed=4 -eject boot.iso
+
+erase:
+	cdrecord -dao -dev=0,0,0 -driveropts=burnfree blank=fast
 
 bios: rombios.bin
 
