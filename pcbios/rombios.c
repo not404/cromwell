@@ -25,7 +25,9 @@
 
 /* includes a subset of config.h that can be compiled by bcc, and applies
    to this file */
-#include "biosconfig.h"
+//#include "biosconfig.h"
+
+#define BX_SMP_PROCESSORS 1
 
 // ROM BIOS for use with Bochs/Plex x86 emulation environment
 
@@ -1105,10 +1107,10 @@ Bit16u cdrom_boot();
 
 #endif // BX_ELTORITO_BOOT
 
-static char bios_cvs_version_string[] = "$Revision: 1.8 $";
-static char bios_date_string[] = "$Date: 2003/07/06 20:10:01 $";
+static char bios_cvs_version_string[] = "$Revision: 1.9 $";
+static char bios_date_string[] = "$Date: 2003/08/26 15:15:18 $";
 
-static char CVSID[] = "$Id: rombios.c,v 1.8 2003/07/06 20:10:01 hamtitampti Exp $";
+static char CVSID[] = "$Id: rombios.c,v 1.9 2003/08/26 15:15:18 hamtitampti Exp $";
 
 /* Offset to skip the CVS $Id: prefix */ 
 #define bios_version_string  (CVSID + 4)
