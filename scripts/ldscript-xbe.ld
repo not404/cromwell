@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript-xbe.ld,v 1.4 2003/04/23 10:11:54 hamtitampti Exp $
+ * $Id: ldscript-xbe.ld,v 1.5 2003/04/23 11:03:56 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript-xbe.ld,v $
+ * Revision 1.5  2003/04/23 11:03:56  hamtitampti
+ * First Step of .xbe 4 times linker fixing
+ *
  * Revision 1.4  2003/04/23 10:11:54  hamtitampti
  * fixed due to compiler warnings
  *
@@ -59,16 +62,14 @@ OUTPUT_ARCH(i386);
 MEMORY
 {
 	ram (rwx) : ORIGIN = 0, LENGTH = 64M
-/*	rom (rx)  : ORIGIN = 0xFF000000, LENGTH = 16M */
-/*	rom (rx)  : ORIGIN = 0x03FC0000, LENGTH = 256K */
 	rom (rx)  : ORIGIN = 0x03B00000, LENGTH = 1M
 }
 
-RAM_BASE = 0x300000;  /* was 0x400000 */
+RAM_BASE = 0x300000;  
 
 /* this should be changed depending the actual size of the rom */
 ROM_SIZE = 256K;
-LOW_ROM = 0x03Bc0000; /* 0xfff00000; */
+LOW_ROM = 0x03B00000; /* 59MB */
 
 LOW_ROM_LOAD = 0;
 TOP_ROM = ( LOW_ROM + ROM_SIZE - 512 );
@@ -84,26 +85,26 @@ SECTIONS {
 		_end_low_rom = . ;
 	}
 
-	.xcodes11 (0x03Bc0080) : AT (0x80) {
+	.xcodes11 (0x03B00080) : AT (0x80) {
 		_start_xcodes11 = . ;
 		*(.xcodes11);
 		_end_xcodes11 = . ;
 	}
 
-	.text ( 0x03Bc0c80 ) : AT ( 0xc80 )  { /* was 0xfffc0c80  0xc80 */
+	.text ( 0x03B00c80 ) : AT ( 0xc80 )  { 
 		_start_text = . ;
 		*(rom);
 		*(.text);
 		_end_text = . ;
 	}
 
-	.amended2bl (0x03Bfd400) : AT (ROM_SIZE - 0x2c00) {
+	.amended2bl (0x03B3d400) : AT (ROM_SIZE - 0x2c00) {
 		_start_amended2bl = . ;
 		*(.amended2bl);
 		_end_amended2bl = . ;
 	}
 
-	.rodata (0x03Bc0c80 + SIZEOF(.text)) : AT ( 0xc80 + SIZEOF(.text)) {
+	.rodata (0x03B00c80 + SIZEOF(.text)) : AT ( 0xc80 + SIZEOF(.text)) {
 		*(.rodata);
 		*(.rodata.str1.1);
 		*(.rodata.str1.32);
@@ -139,11 +140,11 @@ SECTIONS {
 		_heap = . ;
 	}
 
-	.rodata-rombios (0x03Bfe000 - 0x10004) : AT ((0x3e000) - 0x10004) {
+	.rodata-rombios (0x03B3e000 - 0x10004) : AT ((0x3e000) - 0x10004) {
 			*(.rodata-rombios);
 	}
 
-	.justbehind (0x03Bffc80) : AT (ROM_SIZE - 0x380) {
+	.justbehind (0x03B3fc80) : AT (ROM_SIZE - 0x380) {
 		_start_justbehind = . ;
 		*(.justbehind);
 		_end_justbehind = . ;
