@@ -1,12 +1,16 @@
 #
-# $Id: Makefile,v 1.1 2002/09/14 12:11:58 warmcat Exp $
+# $Id: Makefile,v 1.2 2002/09/19 07:13:37 warmcat Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile,v $
-# Revision 1.1  2002/09/14 12:11:58  warmcat
-# Initial revision
+# Revision 1.2  2002/09/19 07:13:37  warmcat
+#
+# Lots of video init added, now getting sysnc to encoder, but no output
+# Franz's cleanups to his Fri13th code merged
+# Crash on BootCpuCache(true) fixed
+# Added code to detect tray state on DVD
 #
 #
 # 2002-09-14 andy@warmcat.com  changed to -Wall and -Werror, superclean
@@ -23,7 +27,7 @@
 
 ### compilers and options
 CC	= gcc
-CFLAGS	= -g -O2 -Wall -Werror -pedantic
+CFLAGS	= -g -O2 -Wall -Werror
 LD	= ld
 LDFLAGS	= -s -S -T ldscript.ld
 OBJCOPY	= objcopy
