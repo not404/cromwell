@@ -1,11 +1,14 @@
 /*
- * $Id: ldscript-xbe.ld,v 1.3 2003/04/20 18:33:18 hamtitampti Exp $
+ * $Id: ldscript-xbe.ld,v 1.4 2003/04/23 10:11:54 hamtitampti Exp $
  * loader script
  *
  * adapted from the Free Bios project
  * and work by Johan Rydberg and Daniel Kahlin.
  *
  * $Log: ldscript-xbe.ld,v $
+ * Revision 1.4  2003/04/23 10:11:54  hamtitampti
+ * fixed due to compiler warnings
+ *
  * Revision 1.3  2003/04/20 18:33:18  hamtitampti
  * Changed Memory Postion of xbeboot
  *
@@ -120,12 +123,6 @@ SECTIONS {
 		*(.sdata2);
 		*(.got);
 		_end_data = .;
-	}
-
-        RamCopy (0x90000) : AT( 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data)) {
-		_start_ramcopy = . - 0x90000 + 0xc80 + SIZEOF(.text)+ SIZEOF(.rodata) +SIZEOF(.data);
-		*(RamCopy);
-		_end_ramcopy = .;
 	}
 
 	/* the data (initialized globals) is moved to ram by the startup code */
