@@ -1,10 +1,15 @@
 #
-# $Id: Makefile.xbe,v 1.4 2003/02/03 18:50:43 huceke Exp $
+# $Id: Makefile.xbe,v 1.5 2003/02/17 08:31:00 huceke Exp $
 #
 # Shamelessly lifted and hacked from the
 # free bios project.
 #
 # $Log: Makefile.xbe,v $
+# Revision 1.5  2003/02/17 08:31:00  huceke
+# Initial checkin of FATX support. It is dissable by default.
+# Some logic for the handling of FATX must be done.
+# Also i have added a new config parsers.
+#
 # Revision 1.4  2003/02/03 18:50:43  huceke
 # Compile Error fix.
 #
@@ -89,7 +94,7 @@ jpeg-6b/jdinput.o jpeg-6b/jdmarker.o jpeg-6b/jdhuff.o jpeg-6b/jdphuff.o jpeg-6b/
 jpeg-6b/jdpostct.o jpeg-6b/jddctmgr.o jpeg-6b/jidctfst.o jpeg-6b/jidctflt.o jpeg-6b/jidctint.o jpeg-6b/jidctred.o \
 jpeg-6b/jdsample.o jpeg-6b/jdcolor.o jpeg-6b/jquant1.o jpeg-6b/jquant2.o jpeg-6b/jdmerge.o jpeg-6b/jmemnobs.o \
 jpeg-6b/jmemmgr.o jpeg-6b/jcomapi.o jpeg-6b/jutils.o jpeg-6b/jerror.o \
-BootFlash.o BootEEPROM.o \
+BootFlash.o BootEEPROM.o BootParser.o BootFATX.o\
 #BootEthernet.o \
 #nvn/nvnetlib.o
 
@@ -111,13 +116,13 @@ default.xbe : default.elf
 	@ls -l $@
 
 clean	:
-	mv nvn/nvnetlib.o nvn/nvnetlib.o.tmp
+#	mv nvn/nvnetlib.o nvn/nvnetlib.o.tmp
 	rm -rf *.o *~ core *.core ${OBJECTS} ${RESOURCES} image.elf image.bin
 	rm -rf *.o *~ core *.core ${OBJECTS} ${RESOURCES} 
 	rm -f  *.a _rombios_.c _rombios_.s rombios.s rombios.bin rombios.txt
 	rm -f  backdrop.elf default.xbe default.elf image-xbe.bin image-xbe.elf
 	rm -f default.xbe default.elf
-	mv nvn/nvnetlib.o.tmp nvn/nvnetlib.o
+#	mv nvn/nvnetlib.o.tmp nvn/nvnetlib.o
 
 image-xbe.elf : ${OBJECTS} ${RESOURCES}
 	${LD} -o $@ ${OBJECTS} ${RESOURCES} ${LDFLAGS-XBE}
